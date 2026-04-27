@@ -1,0 +1,32 @@
+.dash {
+  display: grid;
+  gap: 1rem;
+}
+
+.sidebar nav {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.sidebar a.active {
+  color: var(--accent);
+}
+
+@media (min-width: 980px) {
+  .dash {
+    grid-template-columns: 260px 1fr;
+    align-items: start;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 1rem;
+  }
+}

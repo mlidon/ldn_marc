@@ -1,0 +1,57 @@
+<section class="stacked">
+  <h2>Tags CRUD</h2>
+
+  @if (error()) {
+    <p class="state error">{{ error() }}</p>
+  }
+
+  @if (saving()) {
+    <p class="state">Saving tag...</p>
+  }
+
+  <form class="panel tag-form" [formGroup]="form" (ngSubmit)="save()">
+    <label>
+      Name
+      <input formControlName="name" />
+    </label>
+
+    <div class="actions">
+      <button class="button" type="submit">
+        {{ selectedTag() ? 'Update Tag' : 'Create Tag' }}
+      </button>
+      @if (selectedTag()) {
+        <button class="button ghost" type="button" (click)="cancel()">Cancel</button>
+      }
+    </div>
+  </form>
+
+  @if (loading()) {
+    <p class="state">Loading tags...</p>
+  } @else if (tags().length === 0) {
+    <p class="state">No tags found.</p>
+  } @else {
+    <div class="panel overflow">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tag of tags(); track tag.id) {
+            <tr>
+              <td>{{ tag.name }}</td>
+              <td>{{ tag.slug }}</td>
+              <td class="actions-cell">
+                <button class="button ghost" type="button" (click)="select(tag)">Edit</button>
+                <button class="button danger" type="button" (click)="remove(tag.id)">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

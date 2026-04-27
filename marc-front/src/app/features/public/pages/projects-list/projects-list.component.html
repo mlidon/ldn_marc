@@ -1,0 +1,16 @@
+<section>
+  <h2>Projects</h2>
+  @if (error()) {
+    <p class="state error">{{ error() }}</p>
+  } @else if (loading()) {
+    <p class="state">Loading projects...</p>
+  } @else if (projects().length === 0) {
+    <p class="state">No published projects found.</p>
+  } @else {
+    <div class="grid">
+      @for (project of projects(); track project.id) {
+        <app-content-card [content]="project" detailBasePath="/projects" />
+      }
+    </div>
+  }
+</section>

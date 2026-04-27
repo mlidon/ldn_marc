@@ -1,0 +1,42 @@
+<section class="login-page">
+  <div class="login-card">
+    <button type="button" class="brand" (click)="goHome()">
+      LDN MARC
+    </button>
+
+    <h1>Welcome back</h1>
+    <p class="subtitle">Access your private dashboard.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+      <label>
+        Email
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="you@email.com"
+        />
+      </label>
+
+      <label>
+        Password
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+        />
+      </label>
+
+      @if (errorMessage()) {
+        <p class="error">{{ errorMessage() }}</p>
+      }
+
+      <button type="submit" class="button" [disabled]="form.invalid">
+        Sign in
+      </button>
+    </form>
+
+    <button type="button" class="back-home" (click)="goHome()">
+      ← Back to home
+    </button>
+  </div>
+</section>

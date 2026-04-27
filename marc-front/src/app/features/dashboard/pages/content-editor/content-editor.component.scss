@@ -1,0 +1,18 @@
+.editor-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.editor-header h2 {
+  margin: 0;
+}
+
+.editor-header p {
+  margin-bottom: 0;
+  color: var(--text-muted);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}

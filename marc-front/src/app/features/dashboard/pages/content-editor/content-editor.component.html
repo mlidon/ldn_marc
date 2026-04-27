@@ -1,0 +1,36 @@
+<section class="editor-page">
+  <button type="button" class="button ghost" (click)="goBack()">Back</button>
+
+  <header class="editor-header panel">
+    <h2>{{ title() }}</h2>
+    <p>Manage title, slug, rich content, dates, and tags.</p>
+  </header>
+
+  @if (error()) {
+    <p class="state error">{{ error() }}</p>
+  }
+
+  @if (typeMismatchError()) {
+    <p class="state error">{{ typeMismatchError() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="state">Loading content...</p>
+  } @else if (!error() && !typeMismatchError()) {
+    <app-content-form
+      [mode]="isEditMode() ? 'edit' : 'create'"
+      [type]="contentType()"
+      [initialContent]="content()"
+      [tags]="tags()"
+      (saved)="save($event)"
+    />
+
+    @if (saving()) {
+      <p class="state">Saving...</p>
+    }
+
+    <div class="actions panel">
+      <button type="button" class="button ghost" (click)="cancel()">Cancel</button>
+    </div>
+  }
+</section>

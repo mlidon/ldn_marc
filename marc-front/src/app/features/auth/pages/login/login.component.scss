@@ -1,0 +1,101 @@
+.login-page {
+  min-height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.login-card {
+  width: min(420px, 100%);
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  background: var(--bg-secondary);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+}
+
+.brand {
+  display: block;
+  margin: 0 auto 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 1.6rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  color: var(--text-main);
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  margin: 0.5rem 0 2rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  background: var(--bg-primary);
+  color: var(--text-main);
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--accent-color);
+}
+
+.button {
+  margin-top: 0.5rem;
+  border: 0;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  background: var(--accent-color);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  margin: 0;
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.back-home {
+  margin-top: 1.5rem;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.back-home:hover,
+.brand:hover {
+  color: var(--accent-color);
+}

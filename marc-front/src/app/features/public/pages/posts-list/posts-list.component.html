@@ -1,0 +1,16 @@
+<section>
+  <h2>Posts</h2>
+  @if (error()) {
+    <p class="state error">{{ error() }}</p>
+  } @else if (loading()) {
+    <p class="state">Loading posts...</p>
+  } @else if (posts().length === 0) {
+    <p class="state">No published posts found.</p>
+  } @else {
+    <div class="grid">
+      @for (post of posts(); track post.id) {
+        <app-content-card [content]="post" detailBasePath="/posts" />
+      }
+    </div>
+  }
+</section>

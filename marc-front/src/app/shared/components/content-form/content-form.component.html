@@ -1,0 +1,87 @@
+<form class="panel form" [formGroup]="form" (ngSubmit)="submit()">
+  <label>
+    Title
+    <input formControlName="title" />
+  </label>
+
+  <label>
+    Short Description
+    <textarea formControlName="short_description" rows="3"></textarea>
+  </label>
+
+  <label>
+    Upload Cover Image
+    <input type="file" accept="image/*" (change)="onCoverSelected($event)" />
+  </label>
+
+  @if (uploadingCover()) {
+    <p class="state">Uploading cover image...</p>
+  }
+
+  @if (coverUploadError()) {
+    <p class="state error">{{ coverUploadError() }}</p>
+  }
+
+  @if (form.controls.cover_image_url.value) {
+    <div class="cover-preview-wrap">
+      <img
+        [src]="form.controls.cover_image_url.value"
+        alt="Cover preview"
+        class="cover-preview"
+      />
+      <button type="button" class="button ghost" (click)="removeCoverImage()">
+        Remove cover image
+      </button>
+    </div>
+  }
+
+  <label>
+    HTML Content
+    <app-quill formControlName="content_html"></app-quill>
+  </label>
+
+  <div class="row">
+    <label>
+      Status
+      <select formControlName="status">
+        <option value="draft">Draft</option>
+        <option value="published">Published</option>
+        <option value="scheduled">Scheduled</option>
+      </select>
+    </label>
+
+    @if (statusIs('published')) {
+      <label>
+        Published At
+        <input type="datetime-local" formControlName="published_at" />
+      </label>
+    }
+
+    @if (statusIs('scheduled')) {
+      <label>
+        Scheduled At
+        <input type="datetime-local" formControlName="scheduled_at" />
+      </label>
+    }
+  </div>
+
+  <fieldset>
+    <legend>Tags</legend>
+    <div class="tags">
+      @for (tag of tags(); track tag.id) {
+        <label>
+          <input
+            type="checkbox"
+            [checked]="isTagSelected(tag.id)"
+            (change)="toggleTag(tag.id, $event)"
+          />
+          {{ tag.name }}
+        </label>
+      }
+    </div>
+  </fieldset>
+
+  <button class="button" type="submit">
+    {{ mode() === 'create' ? 'Create' : 'Update' }} {{ type() }}
+  </button>
+</form>

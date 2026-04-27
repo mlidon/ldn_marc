@@ -1,0 +1,45 @@
+.footer {
+  margin-top: auto;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 24px 16px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Social links */
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.social a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+/* Nav */
+.nav {
+  font-size: 14px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* Copy */
+.copy {
+  font-size: 13px;
+  opacity: 0.7;
+}

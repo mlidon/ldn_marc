@@ -1,0 +1,16 @@
+<div class="dash">
+  <aside class="sidebar panel">
+    <h2>Dashboard</h2>
+    <nav>
+      <a routerLink="/dashboard/projects" routerLinkActive="active">Projects</a>
+      <a routerLink="/dashboard/posts" routerLinkActive="active">Posts</a>
+      <a routerLink="/dashboard/tags" routerLinkActive="active">Tags</a>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Public Site</a>
+    </nav>
+    <button class="button ghost" (click)="logout()" type="button">Logout</button>
+  </aside>
+
+  <section class="main">
+    <router-outlet />
+  </section>
+</div>

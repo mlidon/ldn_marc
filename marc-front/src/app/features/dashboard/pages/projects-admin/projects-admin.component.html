@@ -1,0 +1,58 @@
+<section class="stacked">
+  <div class="header-row">
+    <h2>Projects</h2>
+    <a class="button" routerLink="/dashboard/projects/new">New project</a>
+  </div>
+
+  @if (error()) {
+    <p class="state error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="state">Loading projects...</p>
+  } @else if (projects().length === 0) {
+    <p class="state">No projects found.</p>
+  } @else {
+    <div class="panel overflow">
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (project of projects(); track project.id) {
+            <tr>
+              <td>
+                @if (project.cover_image_url) {
+                  <img [src]="project.cover_image_url" [alt]="project.title" class="thumb" />
+                } @else {
+                  <span class="no-image">No image</span>
+                }
+              </td>
+              <td>{{ project.title }}</td>
+              <td>{{ project.slug }}</td>
+              <td>{{ project.status }}</td>
+              <td>
+                @if (getBestDate(project); as dateValue) {
+                  {{ dateValue | date: 'mediumDate' }}
+                } @else {
+                  -
+                }
+              </td>
+              <td class="actions-cell">
+                <a class="button ghost" [routerLink]="['/dashboard/projects', project.id, 'edit']">Edit</a>
+                <button class="button danger" (click)="deleteProject(project.id)" type="button">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

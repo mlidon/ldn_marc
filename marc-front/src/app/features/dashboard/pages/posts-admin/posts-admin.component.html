@@ -1,0 +1,58 @@
+<section class="stacked">
+  <div class="header-row">
+    <h2>Posts</h2>
+    <a class="button" routerLink="/dashboard/posts/new">New post</a>
+  </div>
+
+  @if (error()) {
+    <p class="state error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="state">Loading posts...</p>
+  } @else if (posts().length === 0) {
+    <p class="state">No posts found.</p>
+  } @else {
+    <div class="panel overflow">
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (post of posts(); track post.id) {
+            <tr>
+              <td>
+                @if (post.cover_image_url) {
+                  <img [src]="post.cover_image_url" [alt]="post.title" class="thumb" />
+                } @else {
+                  <span class="no-image">No image</span>
+                }
+              </td>
+              <td>{{ post.title }}</td>
+              <td>{{ post.slug }}</td>
+              <td>{{ post.status }}</td>
+              <td>
+                @if (getBestDate(post); as dateValue) {
+                  {{ dateValue | date: 'mediumDate' }}
+                } @else {
+                  -
+                }
+              </td>
+              <td class="actions-cell">
+                <a class="button ghost" [routerLink]="['/dashboard/posts', post.id, 'edit']">Edit</a>
+                <button class="button danger" (click)="deletePost(post.id)" type="button">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

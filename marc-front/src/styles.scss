@@ -1,0 +1,131 @@
+@import 'quill/dist/quill.snow.css';
+
+:root {
+  --bg: #f2f4f7;
+  --surface: #ffffff;
+  --text-main: #1b2431;
+  --text-muted: #536176;
+  --border-color: #d6dde8;
+  --accent: #0e7a5f;
+  --accent-soft: rgba(14, 122, 95, 0.18);
+}
+
+:root.theme-dark {
+  --bg: #0f1723;
+  --surface: #151f2d;
+  --text-main: #eef3fa;
+  --text-muted: #9eb0c7;
+  --border-color: #2b3b52;
+  --accent: #31c59a;
+  --accent-soft: rgba(49, 197, 154, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg), #ffffff 6%) 0%, var(--bg) 100%);
+  color: var(--text-main);
+  font-family: 'Segoe UI', 'Trebuchet MS', Tahoma, sans-serif;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+}
+
+p {
+  line-height: 1.6;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.button {
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.button.ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+.button.danger {
+  border-color: #c1272d;
+  background: #c1272d;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.65rem;
+  background: transparent;
+  color: var(--text-main);
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.65rem 0.4rem;
+}
+
+.overflow {
+  overflow-x: auto;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.state {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.state.error {
+  color: #c1272d;
+}
+
+.card p {
+  color: var(--text-muted);
+}
