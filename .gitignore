@@ -1,42 +1,12 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
-
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
-
-# Environment files
-/.env
-
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
 # ───────────────────────────────
-# Node / Express backend
+# GLOBAL (aplica a todo el repo)
 # ───────────────────────────────
 
-# Dependencias
-/node_modules/
-
-# Entornos
-.env
-.env.*.local
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
 
 # Logs
 npm-debug.log*
@@ -46,52 +16,64 @@ pnpm-debug.log*
 logs/
 *.log
 
-# PID files
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Cobertura de tests
-/coverage/
-
-# Compilación (TypeScript o bundlers)
-/dist/
-/build/
-/out/
+# Environment files
+.env
+.env.*.local
 
 # Cache
-/.cache/
 .cache/
 *.tsbuildinfo
-
-# Editor / OS
-.DS_Store
-Thumbs.db
-
-# PM2
-.pids
-.pm2/
-
-# Docker
-docker-data/
-*.tar
-
-# Tests
-/.nyc_output/
-
-# Temporal
 tmp/
 temp/
 
-# Prisma (si lo usas)
-prisma/*.db
-prisma/*.db-journal
+# ───────────────────────────────
+# ANGULAR (marc-app)
+# ───────────────────────────────
 
-# Sequelize (si lo usas)
-*.sqlite
-*.sqlite3
+marc-app/dist/
+marc-app/out-tsc/
+marc-app/tmp/
+marc-app/coverage/
+marc-app/.angular/
+marc-app/.angular/
+marc-app/.ng/
+marc-app/.angular-cli.json
+
+# Node modules (Angular)
+marc-app/node_modules/
+
+# ───────────────────────────────
+# NODE / EXPRESS (marc-back)
+# ───────────────────────────────
+
+# Dependencias
+marc-back/node_modules/
+
+# Build
+marc-back/dist/
+marc-back/build/
+marc-back/out/
+
+# Tests
+marc-back/coverage/
+marc-back/.nyc_output/
+
+# PM2
+marc-back/.pm2/
+marc-back/.pids
+
+# Docker
+marc-back/docker-data/
+marc-back/*.tar
+
+# Prisma
+marc-back/prisma/*.db
+marc-back/prisma/*.db-journal
+
+# Sequelize
+marc-back/*.sqlite
+marc-back/*.sqlite3
 
 # Swagger autogenerado
-swagger.json
-swagger.yaml
+marc-back/swagger.json
+marc-back/swagger.yaml
