@@ -26,3 +26,72 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# ───────────────────────────────
+# Node / Express backend
+# ───────────────────────────────
+
+# Dependencias
+/node_modules/
+
+# Entornos
+.env
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# PID files
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Cobertura de tests
+/coverage/
+
+# Compilación (TypeScript o bundlers)
+/dist/
+/build/
+/out/
+
+# Cache
+/.cache/
+.cache/
+*.tsbuildinfo
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+
+# PM2
+.pids
+.pm2/
+
+# Docker
+docker-data/
+*.tar
+
+# Tests
+/.nyc_output/
+
+# Temporal
+tmp/
+temp/
+
+# Prisma (si lo usas)
+prisma/*.db
+prisma/*.db-journal
+
+# Sequelize (si lo usas)
+*.sqlite
+*.sqlite3
+
+# Swagger autogenerado
+swagger.json
+swagger.yaml
