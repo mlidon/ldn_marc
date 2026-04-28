@@ -60,13 +60,13 @@
   </div>
 </section>
 
-<section class="panel section reveal">
+<!-- <section class="panel section reveal">
   <h3>Stack técnico</h3>
 
   <div class="skills-grid">
     <div>
       <h4>Frontend</h4>
-      <p>Angular, React, TypeScript, JavaScript, HTML, SCSS</p>
+      <p>Angular, React, Swift, TypeScript, JavaScript, HTML, SCSS</p>
     </div>
 
     <div>
@@ -76,7 +76,7 @@
 
     <div>
       <h4>Datos</h4>
-      <p>SQL y modelado de datos para aplicaciones escalables</p>
+      <p>SQL, Supabase y modelado de datos para aplicaciones escalables</p>
     </div>
 
     <div>
@@ -94,7 +94,37 @@
       <p>Blender, ZED Camera y desarrollo visual técnico</p>
     </div>
   </div>
+</section> -->
+
+<section class="panel section reveal">
+  <div class="section-heading">
+    <p class="eyebrow">Tecnologías</p>
+    <h3>Stack técnico</h3>
+    <p>
+      Trabajo con tecnologías web, backend, datos, IA aplicada y sistemas interactivos
+      para construir productos completos.
+    </p>
+  </div>
+
+  <div class="tech-grid">
+  @for (tech of techStack; track tech.name) {
+    <div class="tech-card">
+
+      @if (tech.icon) {
+        <ng-icon [name]="tech.icon" size="32"></ng-icon>
+      }
+
+      @if (tech.iconLight && tech.iconDark) {
+        <ng-icon class="icon-light" [name]="tech.iconLight" size="32"></ng-icon>
+        <ng-icon class="icon-dark" [name]="tech.iconDark" size="32"></ng-icon>
+      }
+
+      <span>{{ tech.name }}</span>
+    </div>
+  }
+</div>
 </section>
+
 
 <section class="panel section closing reveal">
   <h3>Objetivo actual</h3>

@@ -125,5 +125,12 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'privacy',
+    loadComponent: () =>
+      import('./features/public/pages/privacy/privacy.component').then(
+        (m) => m.PrivacyComponent,
+      ),
+    },
   { path: '**', redirectTo: '' },
 ];
