@@ -46,12 +46,23 @@
               <td>{{ tag.slug }}</td>
               <td class="actions-cell">
                 <button class="button ghost" type="button" (click)="select(tag)">Edit</button>
-                <button class="button danger" type="button" (click)="remove(tag.id)">Delete</button>
+                <button class="button danger separate" type="button" (click)="onDeleteClick(tag.id)">Delete</button>
               </td>
             </tr>
           }
         </tbody>
       </table>
     </div>
+  }
+
+  @if (showConfirmDelete()) {
+    <app-confirm-dialog
+      title="Eliminar etiqueta"
+      message="¿Seguro que quieres eliminar esta etiqueta? Esta acción no se puede deshacer."
+      confirmText="Eliminar"
+      cancelText="Cancelar"
+      (confirm)="onConfirmDelete()"
+      (cancel)="onCancelDelete()"
+    />
   }
 </section>

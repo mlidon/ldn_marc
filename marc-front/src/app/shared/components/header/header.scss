@@ -1,7 +1,9 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   z-index: 1000;
+  width: 100%;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   backdrop-filter: blur(12px);

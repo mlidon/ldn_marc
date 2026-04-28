@@ -1,16 +1,32 @@
 <section>
-  <h2>Projects</h2>
+  <h2>Proyectos</h2>
   @if (error()) {
     <p class="state error">{{ error() }}</p>
   } @else if (loading()) {
-    <p class="state">Loading projects...</p>
+    <p class="state">Cargando proyectos...</p>
   } @else if (projects().length === 0) {
-    <p class="state">No published projects found.</p>
+    <p class="state">No hay proyectos publicados.</p>
   } @else {
-    <div class="grid">
-      @for (project of projects(); track project.id) {
-        <app-content-card [content]="project" detailBasePath="/projects" />
-      }
-    </div>
+    <app-content-filters
+      searchPlaceholder="Buscar proyectos..."
+      [availableTags]="availableTags()"
+      [searchTerm]="searchTerm()"
+      [selectedTag]="selectedTag()"
+      [sortValue]="sortValue()"
+      (searchTermChange)="onSearch($event)"
+      (selectedTagChange)="onTagChange($event)"
+      (sortValueChange)="onSortChange($event)"
+      (clearFilters)="clearFilters()"
+    />
+
+    @if (filteredProjects().length === 0) {
+      <p class="state">No se encontraron resultados.</p>
+    } @else {
+      <div class="grid">
+        @for (project of filteredProjects(); track project.id) {
+          <app-content-card [content]="project" detailBasePath="/projects" />
+        }
+      </div>
+    }
   }
 </section>

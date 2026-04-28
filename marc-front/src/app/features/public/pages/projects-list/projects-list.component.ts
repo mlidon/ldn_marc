@@ -1,13 +1,14 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
-import { Content } from '../../../../core/models/content.model';
+import { Content, Tag } from '../../../../core/models/content.model';
 import { ContentService } from '../../../../core/services/content.service';
 import { ContentCardComponent } from '../../components/content-card/content-card.component';
+import { ContentFiltersComponent } from '../../components/content-filters/content-filters.component';
 
 @Component({
   selector: 'app-projects-list',
-  imports: [ContentCardComponent],
+  imports: [ContentCardComponent, ContentFiltersComponent],
   templateUrl: './projects-list.component.html',
   styleUrl: './projects-list.component.scss',
 })
@@ -18,6 +19,49 @@ export class ProjectsListComponent {
   readonly projects = signal<Content[]>([]);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
+  readonly searchTerm = signal('');
+  readonly selectedTag = signal<string | null>('all');
+  readonly sortValue = signal<'newest' | 'oldest'>('newest');
+
+  readonly availableTags = computed(() => {
+    const map = new Map<string, Tag>();
+
+    for (const item of this.projects()) {
+      for (const tag of item.tags ?? []) {
+        if (!map.has(tag.slug)) {
+          map.set(tag.slug, tag);
+        }
+      }
+    }
+
+    return Array.from(map.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
+  });
+
+  readonly filteredProjects = computed(() => {
+    const query = this.searchTerm().trim().toLowerCase();
+    const selectedTagSlug = this.selectedTag();
+    const order = this.sortValue();
+
+    const filtered = this.projects().filter((item) => {
+      const matchesQuery =
+        !query ||
+        item.title.toLowerCase().includes(query) ||
+        item.short_description.toLowerCase().includes(query);
+
+      const matchesTag =
+        selectedTagSlug === 'all' ||
+        (item.tags ?? []).some((tag) => tag.slug === selectedTagSlug);
+
+      return matchesQuery && matchesTag;
+    });
+
+    return [...filtered].sort((a, b) => {
+      const left = this.getBestDateTimestamp(a);
+      const right = this.getBestDateTimestamp(b);
+      return order === 'newest' ? right - left : left - right;
+    });
+  });
 
   constructor() {
     this.loading.set(true);
@@ -29,7 +73,37 @@ export class ProjectsListComponent {
       )
       .subscribe({
         next: (items) => this.projects.set(items),
-        error: () => this.error.set('Unable to load projects.'),
+        error: () => this.error.set('No se pudieron cargar los proyectos.'),
       });
+  }
+
+  onSearch(value: string): void {
+    this.searchTerm.set(value);
+  }
+
+  onTagChange(value: string): void {
+    this.selectedTag.set(value);
+  }
+
+  onSortChange(value: 'newest' | 'oldest'): void {
+    this.sortValue.set(value);
+  }
+
+  clearFilters(): void {
+    this.searchTerm.set('');
+    this.selectedTag.set('all');
+    this.sortValue.set('newest');
+  }
+
+  private getBestDateTimestamp(item: Content): number {
+    const dateValue =
+      item.published_at ?? item.scheduled_at ?? item.updated_at ?? item.created_at ?? null;
+
+    if (!dateValue) {
+      return 0;
+    }
+
+    const timestamp = Date.parse(dateValue);
+    return Number.isNaN(timestamp) ? 0 : timestamp;
   }
 }

@@ -1,0 +1,69 @@
+﻿<article class="detail">
+   <a [routerLink]="backLink()" class="button ghost back-btn">{{ backLabel() }}</a>
+    
+  <header class="detail-hero" [class.has-image]="content().cover_image_url">
+    @if (content().cover_image_url) {
+    <img [src]="content().cover_image_url" [alt]="content().title" class="detail-hero-image" />
+    }
+
+    <div class="detail-hero-overlay"></div>
+
+    <div class="detail-hero-content">
+      <h1>{{ content().title }}</h1>
+      @if (content().short_description) {
+      <p class="hero-description">
+        {{ content().short_description }}
+      </p>
+      }
+    
+
+      <div class="hero-meta-bottom">
+        @if (bestDate(content()); as dateValue) {
+          <time class="hero-date" [attr.datetime]="dateValue">
+            {{ dateValue | date: 'longDate' }}
+          </time>
+        }
+
+        @if ((content().tags?.length ?? 0) > 0) {
+          <div class="hero-tags">
+            @for (tag of content().tags ?? []; track tag.id) {
+              <span class="hero-tag">#{{ tag.name }}</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </header>
+    
+  @if (content().content_html) {
+  <section class="panel body-wrap">
+    <div class="reader-action">
+        <button type="button" class="listen-button" [class.is-reading]="isReading()" (click)="toggleReading()" aria-label="Escuchar contenido"
+          title="Escuchar contenido">
+          <span class="listen-icon">🔊</span>
+          <span class="listen-text">
+            {{ isReading() ? 'Pausar lectura' : 'Escuchar' }}
+          </span>
+        </button>
+      </div>
+    <div #contentBody class="content-body" [innerHTML]="safeContentHtml(content())"></div>
+  </section>
+  } @else {
+  <section class="panel body-wrap">
+    <p class="empty">Sin contenido disponible</p>
+  </section>
+  } 
+</article>
+ 
+<footer class="author-footer panel">
+  <div class="author-avatar">LDN</div>
+
+  <div class="author-info">
+    <p class="author-label">Escrito y desarrollado por</p>
+    <h2>Marc Lidón</h2>
+    <p>
+      Desarrollador de software enfocado en integración con IA,
+      sistemas interactivos y productos reales.
+    </p>
+  </div>
+</footer>

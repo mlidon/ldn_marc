@@ -1,0 +1,41 @@
+<div class="panel filters">
+  <label>
+    Buscar
+    <input
+      type="text"
+      [placeholder]="searchPlaceholder()"
+      [value]="searchTerm()"
+      (input)="onSearch($event)"
+    />
+  </label>
+
+  <label>
+    Etiqueta
+    <select [value]="selectedTag()" (change)="onTagChange($event)">
+      <option value="all">Todas las etiquetas</option>
+      @for (tag of availableTags(); track tag.slug) {
+        <option [value]="tag.slug">{{ tag.name }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Estado
+    <select [value]="selectedStatus()" (change)="onStatusChange($event)">
+      <option value="all">Todos los estados</option>
+      <option value="draft">Borrador</option>
+      <option value="published">Publicado</option>
+      <option value="scheduled">Programado</option>
+    </select>
+  </label>
+
+  <label>
+    Orden
+    <select [value]="sortValue()" (change)="onSortChange($event)">
+      <option value="newest">Más recientes</option>
+      <option value="oldest">Más antiguos</option>
+    </select>
+  </label>
+
+  <button type="button" class="button ghost clear-btn" (click)="onClear()">Limpiar filtros</button>
+</div>

@@ -1,4 +1,6 @@
 <div class="quill-field">
+  <input #imageInput class="hidden-file-input" type="file" accept="image/*" (change)="onImageSelected($event)"/>
+
   <div #toolbarHost class="toolbar">
     <span class="ql-formats">
       <select class="ql-header">
@@ -14,6 +16,17 @@
       <button class="ql-italic" type="button" aria-label="Italic"></button>
       <button class="ql-underline" type="button" aria-label="Underline"></button>
       <button class="ql-strike" type="button" aria-label="Strike"></button>
+    </span>
+
+    <span class="ql-formats">
+      <select class="ql-background">
+        <option value="#fef08a"></option>
+        <option value="#bbf7d0"></option>
+        <option value="#bfdbfe"></option>
+        <option value="#fecaca"></option>
+        <option value="#e9d5ff"></option>
+        <option selected></option>
+      </select>
     </span>
 
     <span class="ql-formats">

@@ -4,10 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { Tag } from '../../../../core/models/content.model';
 import { TagService } from '../../../../core/services/tag.service';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-tags-admin',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ConfirmDialogComponent],
   templateUrl: './tags-admin.component.html',
   styleUrl: './tags-admin.component.scss',
 })
@@ -21,6 +22,8 @@ export class TagsAdminComponent {
   readonly loading = signal(false);
   readonly saving = signal(false);
   readonly error = signal<string | null>(null);
+  readonly showConfirmDelete = signal(false);
+  readonly selectedTagId = signal<number | null>(null);
 
   readonly form = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -69,7 +72,26 @@ export class TagsAdminComponent {
       });
   }
 
-  remove(id: number): void {
+  onDeleteClick(id: number): void {
+    this.selectedTagId.set(id);
+    this.showConfirmDelete.set(true);
+  }
+
+  onConfirmDelete(): void {
+    const tagId = this.selectedTagId();
+    if (tagId === null) {
+      return;
+    }
+
+    this.closeDeleteDialog();
+    this.remove(tagId);
+  }
+
+  onCancelDelete(): void {
+    this.closeDeleteDialog();
+  }
+
+  private remove(id: number): void {
     this.error.set(null);
     this.tagService
       .remove(id)
@@ -93,5 +115,10 @@ export class TagsAdminComponent {
         next: (tags) => this.tags.set(tags),
         error: () => this.error.set('Unable to load tags.'),
       });
+  }
+
+  private closeDeleteDialog(): void {
+    this.selectedTagId.set(null);
+    this.showConfirmDelete.set(false);
   }
 }

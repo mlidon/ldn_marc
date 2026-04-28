@@ -1,0 +1,21 @@
+<div class="confirm-backdrop" role="presentation" (click)="onBackdropClick()">
+  <section
+    class="confirm-dialog"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="title"
+    (click)="onDialogClick($event)"
+  >
+    <h3>{{ title }}</h3>
+    <p>{{ message }}</p>
+
+    <div class="dialog-actions">
+      <button class="button ghost" type="button" (click)="onCancelClick()">
+        {{ cancelText }}
+      </button>
+      <button class="button danger" type="button" (click)="onConfirmClick()">
+        {{ confirmText }}
+      </button>
+    </div>
+  </section>
+</div>

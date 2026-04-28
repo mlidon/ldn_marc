@@ -10,6 +10,14 @@
   background: var(--surface);
 }
 
+.ql-editor img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 12px;
+}
+
 .toolbar {
   border-bottom: 1px solid var(--border-color);
   background: color-mix(in srgb, var(--surface), #000000 3%);
@@ -56,4 +64,31 @@
 :host-context(.theme-dark) ::ng-deep .ql-picker-options {
   background: var(--surface);
   border-color: var(--border-color);
+}
+
+:host ::ng-deep .content-body img {
+  max-width: 100%;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.hidden-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+:host ::ng-deep .ql-editor span[style*="background-color"] {
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
+}
+
+:host ::ng-deep .ql-editor span[style*="color: var(--text-main)"] {
+  color: var(--text-main) !important;
 }

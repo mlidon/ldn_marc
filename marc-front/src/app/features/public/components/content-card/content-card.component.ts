@@ -16,7 +16,7 @@ export class ContentCardComponent {
   readonly detailUrl = computed(() => `${this.detailBasePath()}/${this.content().slug}`);
 
   readonly ctaLabel = computed(() =>
-    this.content().content_type === 'project' ? 'View project' : 'Read more',
+    this.content().content_type === 'project' ? 'Ver proyecto' : 'Leer más',
   );
 
   readonly bestDate = computed(

@@ -28,6 +28,24 @@ export class UploadService {
     );
   }
 
+  uploadFile(file: File) {
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    return this.api.post<UploadResponseData>('/upload/file', formData).pipe(
+      map((response) => {
+        const url = response.data?.url;
+
+        if (!url) {
+          throw new Error('Upload response does not contain a URL.');
+        }
+
+        return this.toPublicUploadsUrl(url);
+      }),
+    );
+  }
+
   private toPublicUploadsUrl(url: string): string {
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;

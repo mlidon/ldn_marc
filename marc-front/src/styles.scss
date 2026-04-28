@@ -66,11 +66,16 @@ p {
   cursor: pointer;
   text-decoration: none;
   width: fit-content;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
 }
 
 .button.ghost {
   background: transparent;
   color: var(--accent);
+}
+
+.button:hover {
+  transform: translateY(-1px);
 }
 
 .button.danger {
@@ -112,9 +117,13 @@ td {
 }
 
 .actions-cell {
-  display: flex;
+  // display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
+
+.separate{
+  margin-left: 12px;
 }
 
 .state {
@@ -128,4 +137,14 @@ td {
 
 .card p {
   color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+
+  .button:hover {
+    transform: none;
+  }
 }

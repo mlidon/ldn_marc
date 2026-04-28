@@ -1,16 +1,32 @@
 <section>
-  <h2>Posts</h2>
+  <h2>Artículos</h2>
   @if (error()) {
     <p class="state error">{{ error() }}</p>
   } @else if (loading()) {
-    <p class="state">Loading posts...</p>
+    <p class="state">Cargando artículos...</p>
   } @else if (posts().length === 0) {
-    <p class="state">No published posts found.</p>
+    <p class="state">No hay artículos publicados.</p>
   } @else {
-    <div class="grid">
-      @for (post of posts(); track post.id) {
-        <app-content-card [content]="post" detailBasePath="/posts" />
-      }
-    </div>
+    <app-content-filters
+      searchPlaceholder="Buscar artículos..."
+      [availableTags]="availableTags()"
+      [searchTerm]="searchTerm()"
+      [selectedTag]="selectedTag()"
+      [sortValue]="sortValue()"
+      (searchTermChange)="onSearch($event)"
+      (selectedTagChange)="onTagChange($event)"
+      (sortValueChange)="onSortChange($event)"
+      (clearFilters)="clearFilters()"
+    />
+
+    @if (filteredPosts().length === 0) {
+      <p class="state">No se encontraron resultados.</p>
+    } @else {
+      <div class="grid">
+        @for (post of filteredPosts(); track post.id) {
+          <app-content-card [content]="post" detailBasePath="/posts" />
+        }
+      </div>
+    }
   }
 </section>

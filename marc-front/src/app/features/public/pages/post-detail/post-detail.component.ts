@@ -4,9 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 import { Content } from '../../../../core/models/content.model';
 import { ContentService } from '../../../../core/services/content.service';
+import { ContentDetailComponent } from '../../components/content-detail/content-detail.component';
 
 @Component({
   selector: 'app-post-detail',
+  imports: [ContentDetailComponent],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
 })
@@ -33,7 +35,7 @@ export class PostDetailComponent {
           this.loading.set(false);
           if (item.content_type !== 'post' || item.status !== 'published') {
             this.post.set(null);
-            this.error.set('Post not found.');
+            this.error.set('Artículo no encontrado.');
             return;
           }
 
@@ -43,7 +45,7 @@ export class PostDetailComponent {
         error: () => {
           this.loading.set(false);
           this.post.set(null);
-          this.error.set('Post not found.');
+          this.error.set('Artículo no encontrado.');
         },
       });
   }

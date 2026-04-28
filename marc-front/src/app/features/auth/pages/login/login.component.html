@@ -1,42 +1,35 @@
 <section class="login-page">
-  <div class="login-card">
-    <button type="button" class="brand" (click)="goHome()">
-      LDN MARC
-    </button>
+  <div class="login-bg" aria-hidden="true"></div>
 
-    <h1>Welcome back</h1>
-    <p class="subtitle">Access your private dashboard.</p>
+  <div class="login-card">
+    <div class="card-header">
+      <a class="brand" routerLink="/">LDN MARC</a>
+      <button type="button" class="theme-toggle" (click)="toggleTheme()">
+        {{ darkMode() ? 'Claro' : 'Oscuro' }}
+      </button>
+    </div>
+
+    <h1>Acceso privado</h1>
+    <p class="subtitle">Panel de administración</p>
 
     <form [formGroup]="form" (ngSubmit)="submit()" class="form">
       <label>
         Email
-        <input
-          type="email"
-          formControlName="email"
-          placeholder="you@email.com"
-        />
+        <input type="email" formControlName="email" placeholder="tu@email.com" />
       </label>
 
       <label>
         Password
-        <input
-          type="password"
-          formControlName="password"
-          placeholder="••••••••"
-        />
+        <input type="password" formControlName="password" placeholder="********" />
       </label>
 
       @if (errorMessage()) {
-        <p class="error">{{ errorMessage() }}</p>
+        <p class="error">Credenciales inv�lidas.</p>
       }
 
-      <button type="submit" class="button" [disabled]="form.invalid">
-        Sign in
-      </button>
+      <button type="submit" class="button sign-in" [disabled]="form.invalid">Entrar</button>
     </form>
 
-    <button type="button" class="back-home" (click)="goHome()">
-      ← Back to home
-    </button>
+    <a class="back-home" routerLink="/">Volver al inicio</a>
   </div>
 </section>

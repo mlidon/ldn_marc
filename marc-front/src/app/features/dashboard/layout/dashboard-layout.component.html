@@ -1,16 +1,71 @@
-<div class="dash">
-  <aside class="sidebar panel">
-    <h2>Dashboard</h2>
-    <nav>
-      <a routerLink="/dashboard/projects" routerLinkActive="active">Projects</a>
-      <a routerLink="/dashboard/posts" routerLinkActive="active">Posts</a>
-      <a routerLink="/dashboard/tags" routerLinkActive="active">Tags</a>
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Public Site</a>
+<div
+  class="dashboard-shell"
+  [class.is-mobile]="isMobileView()"
+  [class.is-collapsed]="isSidebarCollapsed() && !isMobileView()"
+>
+  <aside class="sidebar" [class.mobile-open]="isMobileMenuOpen()">
+    <div class="sidebar-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">ML</span>
+        <div class="brand-text">
+          <p class="brand-title">Dashboard</p>
+          <p class="brand-subtitle">Panel de control</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard/projects" routerLinkActive="active" (click)="closeMobileMenu()">
+        <span class="nav-icon" aria-hidden="true">PR</span>
+        <span class="nav-label">Proyectos</span>
+      </a>
+      <a routerLink="/dashboard/posts" routerLinkActive="active" (click)="closeMobileMenu()">
+        <span class="nav-icon" aria-hidden="true">AR</span>
+        <span class="nav-label">Artículos</span>
+      </a>
+      <a routerLink="/dashboard/tags" routerLinkActive="active" (click)="closeMobileMenu()">
+        <span class="nav-icon" aria-hidden="true">ET</span>
+        <span class="nav-label">Etiquetas</span>
+      </a>
     </nav>
-    <button class="button ghost" (click)="logout()" type="button">Logout</button>
   </aside>
 
-  <section class="main">
-    <router-outlet />
-  </section>
+  @if (isMobileView() && isMobileMenuOpen()) {
+    <button
+      class="mobile-backdrop"
+      type="button"
+      aria-label="Cerrar menú lateral"
+      (click)="closeMobileMenu()"
+    ></button>
+  }
+
+  <main class="dashboard-main">
+    <header class="dashboard-main-header">
+      <div class="header-left">
+        <button
+          class="header-menu-button"
+          type="button"
+          aria-label="Alternar menú lateral"
+          [attr.aria-expanded]="sidebarExpanded()"
+          (click)="toggleSidebar()"
+        >
+          ☰
+        </button>
+        <h1>Panel de administración</h1>
+      </div>
+
+      <div class="header-actions">
+        <button class="header-action-button" type="button" (click)="toggleTheme()">
+          {{ darkMode() ? 'Claro' : 'Oscuro' }}
+        </button>
+        <button class="header-action-button logout" type="button" (click)="logout()">
+          Cerrar sesión
+        </button>
+      </div>
+    </header>
+
+    <section class="dashboard-content">
+      <router-outlet />
+    </section>
+  </main>
 </div>

@@ -1,12 +1,13 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../../../core/services/auth.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -15,7 +16,9 @@ export class LoginComponent {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly theme = inject(ThemeService);
 
+  readonly darkMode = this.theme.darkMode;
   readonly errorMessage = signal<string>('');
 
   readonly form = this.fb.nonNullable.group({
@@ -24,6 +27,8 @@ export class LoginComponent {
   });
 
   constructor() {
+    this.theme.init();
+
     if (this.auth.isAuthenticated()) {
       void this.router.navigateByUrl('/dashboard');
     }
@@ -50,5 +55,9 @@ export class LoginComponent {
 
   goHome(): void {
     void this.router.navigateByUrl('/');
+  }
+
+  toggleTheme(): void {
+    this.theme.toggle();
   }
 }

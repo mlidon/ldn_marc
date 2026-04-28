@@ -1,11 +1,11 @@
 @if (error()) {
   <p class="state error">{{ error() }}</p>
 } @else if (loading()) {
-  <p class="state">Loading post...</p>
+  <p class="state">Cargando artículo...</p>
 } @else if (post(); as item) {
-  <article class="panel">
-    <h2>{{ item.title }}</h2>
-    <p>{{ item.short_description }}</p>
-    <div [innerHTML]="item.content_html ?? ''"></div>
-  </article>
+  <app-content-detail
+    [content]="item"
+    backLink="/posts"
+    backLabel="Volver a artículos"
+  />
 }

@@ -13,6 +13,23 @@
   } @else if (projects().length === 0) {
     <p class="state">No projects found.</p>
   } @else {
+    <app-dashboard-content-filters
+      searchPlaceholder="Buscar proyectos..."
+      [availableTags]="availableTags()"
+      [searchTerm]="searchTerm()"
+      [selectedTag]="selectedTag()"
+      [selectedStatus]="selectedStatus()"
+      [sortValue]="sortValue()"
+      (searchTermChange)="onSearch($event)"
+      (selectedTagChange)="onTagChange($event)"
+      (selectedStatusChange)="onStatusChange($event)"
+      (sortValueChange)="onSortChange($event)"
+      (clearFilters)="clearFilters()"
+    />
+
+    @if (filteredProjects().length === 0) {
+      <p class="state">No se encontraron resultados con los filtros actuales.</p>
+    } @else {
     <div class="panel overflow">
       <table>
         <thead>
@@ -26,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (project of projects(); track project.id) {
+          @for (project of filteredProjects(); track project.id) {
             <tr>
               <td>
                 @if (project.cover_image_url) {
@@ -46,13 +63,25 @@
                 }
               </td>
               <td class="actions-cell">
-                <a class="button ghost" [routerLink]="['/dashboard/projects', project.id, 'edit']">Edit</a>
-                <button class="button danger" (click)="deleteProject(project.id)" type="button">Delete</button>
+                <button class="button ghost" [routerLink]="['/dashboard/projects', project.id, 'edit']">Edit</button>
+                <button class="button danger separate" (click)="onDeleteClick(project.id)" type="button">Delete</button>
               </td>
             </tr>
           }
         </tbody>
       </table>
     </div>
+    }
+  }
+
+  @if (showConfirmDelete()) {
+    <app-confirm-dialog
+      title="Eliminar proyecto"
+      message="¿Seguro que quieres eliminar este proyecto? Esta acción no se puede deshacer."
+      confirmText="Eliminar"
+      cancelText="Cancelar"
+      (confirm)="onConfirmDelete()"
+      (cancel)="onCancelDelete()"
+    />
   }
 </section>

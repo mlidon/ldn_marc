@@ -4,9 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 import { Content } from '../../../../core/models/content.model';
 import { ContentService } from '../../../../core/services/content.service';
+import { ContentDetailComponent } from '../../components/content-detail/content-detail.component';
 
 @Component({
   selector: 'app-project-detail',
+  imports: [ContentDetailComponent],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
 })
@@ -33,7 +35,7 @@ export class ProjectDetailComponent {
           this.loading.set(false);
           if (item.content_type !== 'project' || item.status !== 'published') {
             this.project.set(null);
-            this.error.set('Project not found.');
+            this.error.set('Proyecto no encontrado.');
             return;
           }
 
@@ -43,7 +45,7 @@ export class ProjectDetailComponent {
         error: () => {
           this.loading.set(false);
           this.project.set(null);
-          this.error.set('Project not found.');
+          this.error.set('Proyecto no encontrado.');
         },
       });
   }

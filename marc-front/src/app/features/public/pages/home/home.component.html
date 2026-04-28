@@ -1,12 +1,75 @@
-<section class="hero">
-  <p class="eyebrow">Angular 21 Portfolio</p>
-  <h1>Building products from idea to deployment.</h1>
-  <p>
-    This portfolio showcases featured projects, technical writing, and a custom
-    dashboard to manage content.
-  </p>
-  <div class="actions">
-    <a routerLink="/projects" class="button">View Projects</a>
-    <a routerLink="/posts" class="button ghost">Read Posts</a>
+<app-neural-hero />
+
+<section class="home-section reveal">
+  <div class="section-header">
+    <p class="kicker">Qué construyo</p>
+    <h2>Software útil, pensado para producción</h2>
+  </div>
+  <div class="card-grid">
+    <article class="panel info-card">
+      <h3>Productos digitales end-to-end</h3>
+      <p>
+        Construyo productos digitales combinando frontend, backend, datos e IA aplicada,
+        desde la definición funcional hasta el despliegue.
+      </p>
+    </article>
+    <article class="panel info-card">
+      <h3>Integración real de IA</h3>
+      <p>
+        Integro modelos y servicios de IA donde aportan valor real: automatización,
+        comprensión de contenido, apoyo a decisiones y experiencias más inteligentes.
+      </p>
+    </article>
+    <article class="panel info-card">
+      <h3>Sistemas interactivos</h3>
+      <p>
+        Desarrollo experiencias interactivas en tiempo real con Unity, Three.js y hardware,
+        conectadas a servicios web y flujos de datos.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section class="home-section reveal">
+  <div class="section-header">
+    <p class="kicker">Stack principal</p>
+    <h2>Tecnología orientada a rendimiento y evolución</h2>
+  </div>
+  <div class="stack-grid">
+    <div class="stack-item"><strong>Frontend</strong><span>Angular, TypeScript, SCSS</span></div>
+    <div class="stack-item"><strong>Backend</strong><span>Node.js, .NET, APIs REST</span></div>
+    <div class="stack-item"><strong>Datos</strong><span>SQL, diseño de esquemas y consultas optimizadas</span></div>
+    <div class="stack-item"><strong>IA aplicada</strong><span>Python, integración de APIs de visión y voz</span></div>
+    <div class="stack-item"><strong>Interactivo / 3D</strong><span>Unity, Three.js, Godot, Blender</span></div>
+    <div class="stack-item"><strong>Sistemas en tiempo real</strong><span>Sincronización, eventos y procesamiento continuo</span></div>
+  </div>
+</section>
+
+<section class="home-section reveal">
+  <div class="section-header">
+    <p class="kicker">Proyectos destacados / enfoque</p>
+    <h2>De la idea inicial a un producto que funciona</h2>
+  </div>
+  <div class="panel focus-panel">
+    <p>
+      Trabajo desde la idea inicial hasta el despliegue, cuidando arquitectura,
+      experiencia de usuario y rendimiento. Mi objetivo es crear software útil,
+      escalable y orientado a resolver problemas reales.
+    </p>
+    <p>
+      Me enfoco en construir soluciones completas: interfaces claras, servicios robustos,
+      integraciones bien definidas y una base técnica preparada para crecer.
+    </p>
+  </div>
+</section>
+
+<section class="home-section reveal cta-wrap">
+  <div class="panel cta-panel">
+    <h2>¿Buscas un perfil técnico que también piense en producto?</h2>
+    <p>
+      Estoy abierto a colaborar con equipos que construyen software con impacto,
+      combinando desarrollo full stack, IA aplicada y sistemas interactivos.
+    </p>
+    <a class="button" routerLink="/about">Conocer mi enfoque</a>
   </div>
 </section>

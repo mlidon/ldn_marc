@@ -11,10 +11,11 @@
 
     <!-- Nav -->
     <div class="nav">
-      <a routerLink="/">Home</a> |
-      <a routerLink="/about-me">About</a> |
-      <a routerLink="/projects">Projects</a> |
-      <a routerLink="/posts">Posts</a>
+      <a routerLink="/" routerLinkActive="active" (click)="closeMenu()">Home</a> |
+      <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a> |
+      <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()">Projects</a> |
+      <a routerLink="/posts" routerLinkActive="active" (click)="closeMenu()">Posts</a> |
+      <a routerLink="/login" routerLinkActive="active" (click)="closeMenu()">Login</a>
     </div>
 
     <!-- Copyright -->

@@ -1,0 +1,30 @@
+<section
+  #heroHost
+  class="neural-hero"
+  [class.fallback-mode]="!webglSupported"
+  [class.theme-dark]="isDarkTheme"
+  [class.theme-light]="!isDarkTheme"
+>
+  <div #canvasHost class="scene-layer" aria-hidden="true"></div>
+
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <p class="eyebrow">IA orientada a producto</p>
+      <h1>
+        Construyo <span>software inteligente</span>, de la idea al
+        <span>despliegue</span>
+      </h1>
+      <p class="subheadline">
+        Desarrollo aplicaciones que combinan frontend, backend, datos e IA aplicada para
+        convertir ideas en productos reales.
+      </p>
+
+      <div class="hero-actions">
+        <a routerLink="/projects" class="button">Ver proyectos</a>
+        <a href="mailto:?subject=Contacto%20desde%20portfolio" class="button ghost">Contactar</a>
+      </div>
+
+      <p class="tech-line">Angular · Node.js · .NET · Python · Unity · IA aplicada</p>
+    </div>
+  </div>
+</section>

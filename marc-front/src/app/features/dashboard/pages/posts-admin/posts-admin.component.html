@@ -13,6 +13,23 @@
   } @else if (posts().length === 0) {
     <p class="state">No posts found.</p>
   } @else {
+    <app-dashboard-content-filters
+      searchPlaceholder="Buscar artículos..."
+      [availableTags]="availableTags()"
+      [searchTerm]="searchTerm()"
+      [selectedTag]="selectedTag()"
+      [selectedStatus]="selectedStatus()"
+      [sortValue]="sortValue()"
+      (searchTermChange)="onSearch($event)"
+      (selectedTagChange)="onTagChange($event)"
+      (selectedStatusChange)="onStatusChange($event)"
+      (sortValueChange)="onSortChange($event)"
+      (clearFilters)="clearFilters()"
+    />
+
+    @if (filteredPosts().length === 0) {
+      <p class="state">No se encontraron resultados con los filtros actuales.</p>
+    } @else {
     <div class="panel overflow">
       <table>
         <thead>
@@ -26,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (post of posts(); track post.id) {
+          @for (post of filteredPosts(); track post.id) {
             <tr>
               <td>
                 @if (post.cover_image_url) {
@@ -45,14 +62,27 @@
                   -
                 }
               </td>
-              <td class="actions-cell">
-                <a class="button ghost" [routerLink]="['/dashboard/posts', post.id, 'edit']">Edit</a>
-                <button class="button danger" (click)="deletePost(post.id)" type="button">Delete</button>
+              <td class="actions-cell ">
+                <button class="button ghost" [routerLink]="['/dashboard/posts', post.id, 'edit']">Edit</button>
+                <button class="button danger separate" (click)="onDeleteClick(post.id)" type="button">Delete</button>
+            
               </td>
             </tr>
           }
         </tbody>
       </table>
     </div>
+    }
+  }
+
+  @if (showConfirmDelete()) {
+    <app-confirm-dialog
+      title="Eliminar publicación"
+      message="¿Seguro que quieres eliminar esta publicación? Esta acción no se puede deshacer."
+      confirmText="Eliminar"
+      cancelText="Cancelar"
+      (confirm)="onConfirmDelete()"
+      (cancel)="onCancelDelete()"
+    />
   }
 </section>
