@@ -1,21 +1,21 @@
-import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, computed, inject, signal,OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { Content, Tag } from '../../../../core/models/content.model';
 import { ContentService } from '../../../../core/services/content.service';
 import { ContentCardComponent } from '../../components/content-card/content-card.component';
 import { ContentFiltersComponent } from '../../components/content-filters/content-filters.component';
-
+import { SeoService } from '../../../../core/services/seo.service';
 @Component({
   selector: 'app-projects-list',
   imports: [ContentCardComponent, ContentFiltersComponent],
   templateUrl: './projects-list.component.html',
   styleUrl: './projects-list.component.scss',
 })
-export class ProjectsListComponent {
+export class ProjectsListComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly contentService = inject(ContentService);
-
+  private readonly seoService = inject(SeoService);
   readonly projects = signal<Content[]>([]);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
@@ -75,6 +75,14 @@ export class ProjectsListComponent {
         next: (items) => this.projects.set(items),
         error: () => this.error.set('No se pudieron cargar los proyectos.'),
       });
+  }
+
+  ngOnInit(): void {
+    this.seoService.update({
+      title: 'Proyectos | Marc Lidón',
+      description: 'Explora los proyectos de Marc Lidón, desarrollador de software especializado en Angular, Node.js, .NET, Python, Unity e integración de IA aplicada.',
+      keywords: 'proyectos, portfolio, Marc Lidón, desarrollador software, Angular, Node.js, .NET, Python, Unity, IA aplicada',
+    }); 
   }
 
   onSearch(value: string): void {

@@ -2,15 +2,20 @@
   <div class="login-bg" aria-hidden="true"></div>
 
   <div class="login-card">
-    <div class="card-header">
-      <a class="brand" routerLink="/">LDN MARC</a>
+    
+    <div class="btn-toggle">
+     
       <button type="button" class="theme-toggle" (click)="toggleTheme()">
         {{ darkMode() ? 'Claro' : 'Oscuro' }}
       </button>
     </div>
-
-    <h1>Acceso privado</h1>
-    <p class="subtitle">Panel de administración</p>
+    <div class="card-header">
+      <a class="brand" routerLink="/">
+        <img class="logo-login" src="img/logo.png" alt="LDN MARC" >
+      </a>
+      <h1>Acceso privado</h1>
+      <p class="subtitle">Panel de administración</p>
+    </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()" class="form">
       <label>
@@ -24,7 +29,7 @@
       </label>
 
       @if (errorMessage()) {
-        <p class="error">Credenciales inv�lidas.</p>
+        <p class="error">Credenciales inválidas.</p>
       }
 
       <button type="submit" class="button sign-in" [disabled]="form.invalid">Entrar</button>

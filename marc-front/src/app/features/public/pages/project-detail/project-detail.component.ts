@@ -6,6 +6,8 @@ import { Content } from '../../../../core/models/content.model';
 import { ContentService } from '../../../../core/services/content.service';
 import { ContentDetailComponent } from '../../components/content-detail/content-detail.component';
 
+
+
 @Component({
   selector: 'app-project-detail',
   imports: [ContentDetailComponent],

@@ -34,9 +34,15 @@
 
 .card-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 0.8rem;
+  margin-bottom: 1.25rem;
+}
+.btn-toggle{
+  display: flex;
+  justify-content: end;
   margin-bottom: 1.25rem;
 }
 
@@ -174,4 +180,15 @@ input:focus {
   input {
     transition: none;
   }
+}
+
+.logo-login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 8rem;
+  height: auto;
+
 }
